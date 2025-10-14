@@ -1,5 +1,5 @@
 import { cleanup, screen } from "@testing-library/react";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, vi } from "vitest";
 
 beforeEach(() => {
 	document.body.innerHTML = '<div id="root"></div>';
