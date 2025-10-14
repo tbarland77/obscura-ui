@@ -20,7 +20,7 @@ export default defineConfig({
 				"dist/",
 				"build/",
 				"vite.config.ts",
-				"src/setupTests.ts",
+				"src/setuptests.ts",
 			],
 			thresholds: {
 				lines: 80,
