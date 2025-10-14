@@ -1,5 +1,5 @@
 import { cleanup, screen } from "@testing-library/react";
-import { afterEach, beforeEach } from 'vitest';
+import { afterEach, beforeEach } from "vitest";
 import { mountApp } from "./main"; // now safe to import
 
 beforeEach(() => {
