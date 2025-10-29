@@ -1,1 +1,21 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
+
+@theme {
+  --color-midnight: #0b0c10;
+  --color-blood: #8b0000;
+  --color-fog: #d3d3d3;
+  --color-pumpkin: #ff7518;
+  --color-ghost: #f8f8ff;
+  --color-moonlight: #c0c0c0;
+  --font-spooky: 'Creepster', cursive;
+  --font-eerie: 'Spectral SC', serif;
+  --shadow-eerie: 0 0 15px rgba(255, 0, 0, 0.5);
+  --shadow-ghostly: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+@layer base {
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+}

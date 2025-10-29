@@ -1,8 +1,8 @@
+import StoryList from "../features/stories/StoryList/story-list";
+
 export default function Home() {
 	return (
-		<div className="p-8 text-center">
-			<h1 className="text-3xl font-bold">Welcome to the Home Page</h1>
-			<p className="mt-4 text-gray-600">This is your starting point.</p>
-		</div>
+		<StoryList>
+		</StoryList>
 	);
 }
