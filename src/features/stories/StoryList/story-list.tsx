@@ -63,6 +63,7 @@ export default function StoryList() {
       {mockStories.map((s) => (
         <StoryCard
           key={s.id}
+          id={s.id}
           title={s.title}
           content={s.content}
           author={s.author}

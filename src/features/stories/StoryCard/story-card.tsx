@@ -1,6 +1,8 @@
-import React from 'react';
+import type { FC } from 'react';
+import { BookOpen, Calendar, User } from 'lucide-react';
 
 type StoryCardProps = {
+    id: string;
     title: string;
     content: string;
     author: string;
@@ -8,30 +10,61 @@ type StoryCardProps = {
     createdAt: string;
 };
 
-export const StoryCard: React.FC<StoryCardProps> = ({ title, content, author, tags = [], createdAt }) => {
+export const StoryCard: FC<StoryCardProps> = ({ id, title, content, author, tags = [], createdAt }) => {
+    const tagColors = ['bg-blood', 'bg-pumpkin', 'bg-moonlight'];
+
+    // Stagger animation based on card position
+    const animationDelay = `${(Number.parseInt(id) - 1) * 100}ms`;
+
+    // Format date in UTC to avoid timezone issues
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString + 'T00:00:00Z');
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            timeZone: 'UTC'
+        });
+    };
+
     return (
-    <div className="bg-midnight text-ghost shadow-eerie p-3 sm:p-4 md:p-6 rounded-lg hover:shadow-lg transition-all duration-300 border-l-4 border-pumpkin">
-      <h2 className="font-spooky text-lg sm:text-xl md:text-2xl text-pumpkin tracking-widest mb-2 hover:text-orange-400 transition-colors">
-        {title}
-      </h2>
-      <p className="font-eerie text-fog text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-3">
+    <article
+    className="animate-fade-in bg-linear-to-br from-midnight to-shadow text-ghost shadow-deep hover:shadow-[0_12px_40px_rgba(255,117,24,0.25)] p-3 sm:p-4 md:p-6 rounded-lg transition-all duration-300 border-l-4 border-pumpkin hover:scale-[1.02] group hover-lift"
+    style={{ animationDelay }}
+    data-testid={`story-card-${id}`} aria-label={`Story titled ${title}`}>
+      <div className="flex items-start gap-2 mb-2">
+        <BookOpen size={20} className="text-pumpkin opacity-70 mt-1 shrink-0" aria-hidden="true" />
+        <h2 className="font-spooky text-lg sm:text-xl md:text-2xl text-pumpkin tracking-widest transition-all pb-1 border-b-2 border-pumpkin group-hover:brightness-125 group-hover:text-shadow-lg duration-200 flex-1">
+          {title}
+        </h2>
+      </div>
+      <p className="font-eerie text-fog text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-3 group-hover:text-whisper transition-colors duration-200">
         {content}
       </p>
-      <div className="border-t border-moonlight opacity-20 my-3"></div>
-      <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center text-xs text-moonlight mb-3">
-        <span>By {author}</span>
-        <span>{new Date(createdAt).toLocaleDateString()}</span>
+      {content.length > 100 && (
+        <p className="text-xs text-pumpkin opacity-60 mb-3 hover:opacity-100 transition-opacity duration-200">Click to read more →</p>
+      )}
+      <div className="border-t border-mist my-3"></div>
+      <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center text-xs mb-3">
+        <span className="inline-flex items-center gap-1.5 bg-shadow px-2 py-1 rounded opacity-80 hover:opacity-100 transition-opacity">
+          <User size={14} className="text-moonlight" aria-hidden="true" />
+          By {author}
+        </span>
+        <span className="inline-flex items-center gap-1.5 text-moonlight opacity-70 hover:opacity-100 transition-opacity">
+          <Calendar size={14} aria-hidden="true" />
+          {formatDate(createdAt)}
+        </span>
       </div>
       <div className="flex flex-wrap gap-1 sm:gap-2">
-        {tags.map((tag) => (
+        {tags.map((tag, index) => (
           <span
             key={tag}
-            className="bg-blood text-ghost px-2.5 py-1.5 rounded-sm text-xs whitespace-nowrap hover:bg-orange-600 transition-colors cursor-pointer"
+            className={`${tagColors[index % tagColors.length]} text-ghost px-2.5 py-1.5 rounded-sm text-xs whitespace-nowrap hover:opacity-90 transition-all duration-200 transform hover:-translate-y-1 hover:rotate-1 hover:shadow-lg cursor-default`}
           >
             #{tag}
           </span>
         ))}
       </div>
-    </div>
+    </article>
   );
 };

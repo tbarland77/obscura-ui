@@ -3,12 +3,12 @@ import App from "./App";
 import { MemoryRouter } from "react-router-dom";
 
 describe("App", () => {
-  it("Renders Welcome to the Home Page", () => {
+  it("Renders the home page with story cards", () => {
     render(
       <MemoryRouter>
         <App />
       </MemoryRouter>
     );
-    expect(screen.getByText("Welcome to the Home Page")).toBeInTheDocument();
+    expect(screen.getByLabelText("Story titled The Midnight Garden")).toBeInTheDocument();
   });
 });

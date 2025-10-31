@@ -1,21 +1,116 @@
 ﻿@import "tailwindcss";
 
 @theme {
+  /* Core colors */
   --color-midnight: #0b0c10;
   --color-blood: #8b0000;
   --color-fog: #d3d3d3;
   --color-pumpkin: #ff7518;
   --color-ghost: #f8f8ff;
   --color-moonlight: #c0c0c0;
+
+  /* Extended palette */
+  --color-shadow: #1a1a1a;
+  --color-whisper: #e8e8f0;
+  --color-ember: #ff4500;
+  --color-mist: rgba(192, 192, 192, 0.1);
+
+  /* Typography */
   --font-spooky: 'Creepster', cursive;
   --font-eerie: 'Spectral SC', serif;
+
+  /* Shadows */
   --shadow-eerie: 0 0 15px rgba(255, 0, 0, 0.5);
   --shadow-ghostly: 0 0 10px rgba(255, 255, 255, 0.3);
+  --shadow-deep: 0 8px 30px rgba(0, 0, 0, 0.6);
+  --shadow-hover: 0 12px 40px rgba(139, 0, 0, 0.4);
+
+  /* Border radius */
+  --radius-haunted: 0.75rem;
+  --radius-whisper: 0.25rem;
 }
 
 @layer base {
+  /* Existing flicker animation */
   @keyframes flicker {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.4; }
+  }
+
+  /* Subtle floating animation */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+  }
+
+  /* Fade in from darkness */
+  @keyframes fadeInFromDark {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Pulse glow effect */
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 10px rgba(255, 117, 24, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(255, 117, 24, 0.5); }
+  }
+
+  /* Eerie text shimmer */
+  @keyframes textShimmer {
+    0% { text-shadow: 0 0 2px rgba(255, 117, 24, 0.5); }
+    50% { text-shadow: 0 0 10px rgba(255, 117, 24, 0.8); }
+    100% { text-shadow: 0 0 2px rgba(255, 117, 24, 0.5); }
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  .animate-flicker {
+    animation: flicker 2s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-fade-in {
+    animation: fadeInFromDark 0.6s ease-out forwards;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+
+  .animate-text-shimmer {
+    animation: textShimmer 2s ease-in-out infinite;
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    transition: transform 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-3px);
+  }
+
+  /* Glass morphism */
+  .glass-spooky {
+    background: rgba(11, 12, 16, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(192, 192, 192, 0.1);
+  }
+
+  /* Gradient overlays */
+  .gradient-veil {
+    background: linear-gradient(180deg,
+      rgba(11, 12, 16, 0) 0%,
+      rgba(11, 12, 16, 0.8) 100%);
   }
 }
