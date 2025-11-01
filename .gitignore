@@ -21,6 +21,9 @@ out/
 # Production / Test
 coverage/
 
+# Playground (development only)
+src/playground/
+
 # Environment files
 .env
 .env.*

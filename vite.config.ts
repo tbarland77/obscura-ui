@@ -1,9 +1,18 @@
+import path from "node:path";
+import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
 
 // https://vite.dev/config/
+
+// need to run this for it to work: npm run dev -- --host
 export default defineConfig({
-	plugins: [react()],
+	plugins: [react(), tailwindcss()],
+	resolve: {
+		alias: {
+			"@": path.resolve(__dirname, "./src"),
+		},
+	},
 	test: {
 		globals: true,
 		environment: "jsdom",
@@ -28,6 +37,15 @@ export default defineConfig({
 				branches: 80,
 				statements: 80,
 			},
+		},
+	},
+	server: {
+		host: true,
+		port: 5173,
+		hmr: {
+			host: "127.0.0.1",
+			port: 5173,
+			protocol: "ws",
 		},
 	},
 });
