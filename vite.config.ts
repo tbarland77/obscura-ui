@@ -4,8 +4,6 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
 
 // https://vite.dev/config/
-
-// need to run this for it to work: npm run dev -- --host
 export default defineConfig({
 	plugins: [react(), tailwindcss()],
 	resolve: {
